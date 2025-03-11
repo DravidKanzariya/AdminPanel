@@ -4,7 +4,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api", credentials: "include", }),
+    baseQuery: fetchBaseQuery({
+        baseUrl:
+            //  "http://localhost:5000/api", 
+            "https://adminpanel-ooix.onrender.com/api",
+        credentials: "include",
+    }),
     tagTypes: ["User", "Admin", "Trainer"],
     endpoints: (builder) => ({
 
@@ -91,7 +96,7 @@ export const apiSlice = createApi({
 
         updateUser: builder.mutation({
             query: ({ id, ...patch }) => ({
-                url: `/dashboard/update-user/${id}`, 
+                url: `/dashboard/update-user/${id}`,
                 method: 'PATCH',
                 body: patch,
                 credentials: "include",
@@ -118,7 +123,7 @@ export const apiSlice = createApi({
                     console.error("Failed to update user:", error);
                 }
             },
-            invalidatesTags: ['User', "Admin", "Trainer"], 
+            invalidatesTags: ['User', "Admin", "Trainer"],
         }),
 
         sendMail: builder.mutation({
@@ -137,12 +142,12 @@ export const apiSlice = createApi({
                 body: { token },
             }),
         }),
-        
+
         setPassword: builder.mutation({
             query: ({ token, password }) => ({
                 url: "/auth/set-password",
                 method: "PATCH",
-                body: { token,password },
+                body: { token, password },
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -169,7 +174,7 @@ export const apiSlice = createApi({
             query: ({ token, status }) => ({
                 url: "/auth/set-status",
                 method: "PATCH",
-                body: { token,status },
+                body: { token, status },
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
