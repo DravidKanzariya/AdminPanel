@@ -88,7 +88,15 @@ const loginUser = asyncHandler(async (req, res) => {
         throw new ApiError(404, "You can not login right now. Please contact for support... ")
     }
 
-    if (user.status ===  "invitation sent" || "invitaion accepted" || "password not set" ) {
+    if (user.status ===  "invitation sent" ) {
+        throw new ApiError(404, "Password has not set. Please set password to login.... ")
+    }
+      
+    if (user.status ===  "invitaion accepted") {
+        throw new ApiError(404, "Password has not set. Please set password to login.... ")
+    }
+
+    if (user.status ===  "password not set" ) {
         throw new ApiError(404, "Password has not set. Please set password to login.... ")
     }
 
