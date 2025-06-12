@@ -1,2 +1,2 @@
 # AdminPanel
-Admi Panel 
+Admin Panel 
